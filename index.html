@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+          height: 100vh; /*ビューポート（画面の表示領域）の高さの 100% を意味する*/
+          margin: 0; 
+          display: flex;
+          flex-direction: column;  /* 縦に並べる */
+          justify-content: center;
+          align-items: center;
+          background-color: #f0f0f0;
+        }
+      
+        table {
+          border-collapse: collapse;
+          border: 1px solid #333;
+        }
+      
+        th, td {
+          border: 1px solid #666;
+          padding: 8px 12px;
+          text-align: center;
+        }
+      
+        button {
+          display: block;
+          margin: 16px auto 0;
+          padding: 8px 16px;
+          font-size: 16px;
+          cursor: pointer;
+        }
+
+        .aki {
+          font-size: 18px;
+          font-weight: bold;
+          color: rgb(212, 23, 64); 
+          background-color: gray;
+          text-shadow:aqua;
+        }
+      </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>1列目</th>
+                <th>2列目</th>
+                <th>3列目</th>
+                <th>4列目</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="humans">本田</td>
+                <td class="humans">西田</td>
+                <td class="humans">大田</td>
+                <td class="humans">森下</td>
+            </tr>
+            <tr>
+                <td class="humans">眞栄田</td>
+                <td class="humans">渡利</td>
+                <td class="humans">隆盛</td>
+                <td class="humans">坂田</td>
+            </tr>
+            <tr>
+                <td class="humans">井筒</td>
+                <td class="humans">高取</td>
+                <td class="aki">空き</td>
+                <td class="aki">空き</td>
+            </tr>
+        </tbody>
+    </table>
+    <button id="button">座席をシャッフル</button>
+
+    <script>
+        const humans = [`本田`, `西田`, `大田`, `森下`, `眞栄田`, `渡利`, `隆盛`, `坂田`, `井筒`, `高取`];
+        const newHumans = humans.slice();
+        const index = humans.length;
+
+        const button = document.querySelector(`#button`);
+        button.addEventListener(`click`,
+            function(){
+                for(let i=index-1; i>0; i--){
+                    let j = Math.floor(Math.random() * (i + 1));
+                    [newHumans[i], newHumans[j]] = [newHumans[j], newHumans[i]];
+                }
+
+                const tds = document.querySelectorAll(`.humans`);
+                for(let i=0; i<index; i++){
+                    tds[i].textContent = newHumans[i];
+                }
+
+            }
+        )
+
+
+    </script>
+</body>
+</html>
